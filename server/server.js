@@ -1,5 +1,15 @@
+const path = require("path");
 const express = require("express");
+const cors = require("cors");
 const app = express();
+app.use(cors({
+    origin: "*",
+    methods: ["GET,PUT,PATCH,POST,DELETE"],
+    allowedHeaders: ["content-type","Authorization"]
+}));
+const clientBuildPath = path.join(__dirname, "../client/build");
+console.log("clientBuildPath", clientBuildPath);
+app.use(express.static(clientBuildPath));
 require("dotenv").config() //load environment variables
 
 
